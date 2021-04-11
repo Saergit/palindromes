@@ -1,0 +1,22 @@
+<h1 class='text-center'>Highscores</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Name</th>
+      <th>Points</th>
+      <th>Phrase</th>
+    </tr>
+  </thead>
+  <% @scores.each_with_index do |item, index| %>
+    <tr>
+      <td><%=index + 1 %></td>
+      <td><%=item.user&.name %></td>
+      <td><%=item.points %></td>
+      <td><%=item.palindrome %></td>
+    </tr>
+  <% end if @scores.present? %>
+</table>
+<br>
+<br>
+<button><%= link_to "Create a Palindrome!", '/scores/new', class: "mx-2" %></button> 

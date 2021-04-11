@@ -4,13 +4,14 @@ class CreateTables < ActiveRecord::Migration[5.2]
     create_table :users, id: :uuid, default: 'gen_random_uuid()' do |t|
 
       t.string :name, null: false
-      t.string :password
+      t.string :password_digest, null: false
     end
 
     create_table :scores, id: :uuid, default: 'gen_random_uuid()' do |t|
 
-      t.string :points, null: false
-      t.references :user, null: false
+      t.integer :points, null: false
+      t.references :user, type: :uuid, null: false
+      t.string :palindrome
     end
   end
 end

@@ -11,7 +11,11 @@ RUN apk update && apk --update add \
     ttf-freefont \
     font-noto \
     fontconfig \
-    nodejs-lts
+    nodejs-lts \
+    git
+
+# version lock postgresql tools to the db version
+RUN apk add --repository http://dl-cdn.alpinelinux.org/alpine/v3.4/main/ postgresql~=9.5
 
 # Setup Rails application
 # =======================
@@ -33,6 +37,9 @@ ENV APP_DIR /app
 RUN mkdir $APP_DIR
 WORKDIR $APP_DIR
 ADD . $APP_DIR
+
+# Create mountpoint for shared files between containers
+RUN mkdir /share
 
 RUN RAILS_ENV=$RAILS_ENV SECRET_KEY_BASE=dummy REDIS_ENDPOINT=dummy DATABASE_URL=postgres://dummy:dummy@dummy/dummy bundle exec rake assets:clobber assets:precompile
 

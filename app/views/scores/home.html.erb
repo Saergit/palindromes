@@ -1,0 +1,13 @@
+<h1 class='text-center'>Highscores</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Points</th>
+  </tr>
+  <%= @scores.each do |item| %>
+    <tr>
+      <td><%=item.user.name %></td>
+      <td><%=item.points %></td>
+    </tr>
+  <% end if @scores.present? %>
+</table>
