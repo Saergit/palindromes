@@ -24,7 +24,7 @@ class ScoresController < ApplicationController
       redirect_to scores_path
     else
       flash[:danger] = "Your input was not a palindrome. :( "
-      redirect_to 'new'
+      redirect_to new_score_path
     end
   end
 
